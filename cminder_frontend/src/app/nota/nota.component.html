@@ -1,0 +1,75 @@
+
+    <div class="container">
+
+        <button (click)="irAAsignaturas()" style="font-size: 24px;">←</button>
+
+
+        <h1>Lista de Notas</h1>
+        <button class="btn-add" (click)="confirmarAgregar()">Agregar Nota</button>
+        
+        <table>
+            <thead>
+                <tr>
+                    
+                    <th>Nombre</th>
+                    <th>Nota</th>
+                    <th>Porcentaje</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="nota-list">
+                <tr *ngFor="let nota of notas">
+                    
+                    <td>{{ nota.titulo }}</td>
+                    <td>{{ nota.valor }}</td>
+                    <td>{{ nota.porcentaje }}</td>
+                    <td>
+                        <button class="btn-update" (click)="confirmarActualizar(nota)">Actualizar</button>
+                        <button class="btn-delete"  (click)="nota.id && borrarNota(nota)">Borrar</button>
+                    </td>
+                </tr>
+                <!-- Más filas de notas irán aquí -->
+            </tbody>
+        </table>
+
+
+        <div *ngIf="mostrarModalAgregar" class="modal">
+            <div class="modal-content">
+              <span class="close" (click)="mostrarModalAgregar = false">×</span>
+              <h2>Agregando Nota</h2>
+              <form (submit)="agregarNota(); ">
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" (change)="actualizarTitulo($event)"><br>
+                <label for="nota">Nota:</label><br>
+                <input type="number" id="nota" name="nota" step="0.01" required (change)="actualizarValor($event)"><br>
+                <label for="porcentaje">Porcentaje:</label><br>
+                <input type="number" id="porcentaje" name="porcentaje" step="0.01" required (change)="actualizarPorcentaje($event)"><br>
+                <input type="submit" value="Agregar">
+              </form>
+            </div>
+          </div>
+          
+
+
+
+
+          <div *ngIf="mostrarModalActualizar" class="modal">
+            <div class="modal-content">
+              <span class="close" (click)="mostrarModalActualizar = false">×</span>
+              <h2>Actualizando Nota</h2>
+              <form (submit)="actualizarNota(); $event.preventDefault()">
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" (change)="actualizarNombreActualizacion($event)" value="{{NotaActualizar.titulo}}"><br>
+                <label for="creditos">nota:</label><br>
+                <input type="number" id="valor" name="valor" step="0.01" required (change)="actualizarValorActualizacion($event)" value="{{NotaActualizar.valor}}"><br>
+                <label for="creditos">porcentaje:</label><br>
+                <input type="number" id="porcentaje" name="porcentaje" step="0.01" required (change)="actualizarPorcentajeActualizacion($event)" value="{{NotaActualizar.valor}}"><br>
+                <input type="submit" value="Actualizar">
+              </form>
+            </div>
+          </div>
+          
+
+
+        <button class="btn-ok" (click)="onOkClick()">Calcular</button>
+    </div>

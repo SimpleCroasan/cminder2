@@ -1,0 +1,80 @@
+
+
+    <div class="container">
+        <h1>Lista de Asignaturas</h1>
+        <button class="btn-add" (click)="mostrarModal = true">Añadir Asignatura</button>
+        <div *ngIf="mostrarModal" class="modal">
+            <div class="modal-content">
+                <span class="close" (click)="mostrarModal = false">×</span>
+                <h2>Creando Asignatura</h2>
+                <form (submit)="agregarAsignatura($event)">
+                  <label for="nombre">Nombre:</label><br>
+                  <input type="text" id="nombre" name="nombre" (input)="actualizarNombre($event)"><br>
+                  <label for="creditos">Número de Créditos:</label><br>
+                  <input type="number" id="creditos" name="creditos" (input)="actualizarCreditos($event)"><br>
+                  <input type="submit" value="Enviar">
+                </form>
+              </div>
+            </div>
+
+              
+        <table>
+            <thead>
+                <tr>
+                    <th>Asignatura</th>
+                    <th>Acciones</th>
+                    <th>Definitiva</th>
+                    <th>Número de Créditos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let asignatura of asignaturas">
+                    <td>{{ asignatura.nombre }}</td>
+                    <td>
+                        <button class="btn btn-ver" (click)="verNotas(asignatura)">Ver</button>
+                        <button class="btn btn-borrar" (click)="confirmarBorrar(asignatura)">Borrar</button>
+                        <button class="btn btn-actualizar" (click)="confirmarActualizar(asignatura)">Actualizar</button>
+                    </td>
+                    <td>{{ asignatura.notaFinal }}</td>
+                    <td>{{ asignatura.creditos }}</td>
+                </tr>
+            </tbody>
+
+        </table>
+        <button class="btn-calculate" (click)="obtenerPromedioPonderado()">Calcular Promedio</button>
+        <div id="promedio" class="result"></div>
+        <p>El promedio ponderado es: {{promedioPonderado}}</p>
+
+
+        
+        <div *ngIf="mostrarModalBorrar" class="modal">
+            <div class="modal-content">
+              <span class="close" (click)="mostrarModalBorrar = false">×</span>
+              <h2>Confirmar Borrado</h2>
+              <p>¿Estás seguro de que deseas borrar la asignatura {{ asignaturaABorrar?.nombre }}?</p>
+              <button (click)="borrarAsignatura()">Sí</button>
+              <button (click)="mostrarModalBorrar = false">No</button>
+            </div>
+          </div>
+
+
+
+          <div *ngIf="mostrarModalActualizar" class="modal">
+            <div class="modal-content">
+              <span class="close" (click)="mostrarModalActualizar = false">×</span>
+              <h2>Actualizando Asignatura</h2>
+              <form (submit)="actualizarAsignatura(); $event.preventDefault()">
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" (change)="actualizarNombreActualizacion($event)" value="{{asignaturaActualizar.nombre}}"><br>
+                <label for="creditos">Número de Créditos:</label><br>
+                <input type="number" id="creditos" name="creditos" (change)="actualizarCreditosActualizacion($event)" value="{{asignaturaActualizar.creditos}}"><br>
+                <input type="submit" value="Actualizar">
+              </form>
+            </div>
+          </div>
+          
+
+
+
+    </div>
+
