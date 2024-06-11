@@ -3,6 +3,7 @@ package Cminder.Demo2.Models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
@@ -12,7 +13,7 @@ public class Tarea {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Getter
+    @Setter
     @Column(name = "descripcion")
     private String descripcion;
 
