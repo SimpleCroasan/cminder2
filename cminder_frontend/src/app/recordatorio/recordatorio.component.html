@@ -1,1 +1,8 @@
-<p>recordatorio works!</p>
+<mat-form-field>
+    <input matInput [matDatepicker]="picker" (dateChange)="actualizarFecha($event)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  
+  <button (click)="agregarRecordatorio(tarea)">Submit</button>
+  

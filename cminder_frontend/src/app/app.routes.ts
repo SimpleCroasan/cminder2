@@ -3,6 +3,7 @@ import { AsignaturasComponent } from './asignaturas/asignaturas.component';
 import { NotaComponent } from './nota/nota.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { MenuComponent } from './menu/menu.component';
+import { RecordatorioComponent } from './recordatorio/recordatorio.component';
 
 export const routes: Routes = [
 
@@ -19,7 +20,11 @@ export const routes: Routes = [
     },
     {path: 'menu', component: MenuComponent
 
-    }
+    },
+    
+    {path: 'recordatorio/:id', component: RecordatorioComponent
+
+    },
 
 
 

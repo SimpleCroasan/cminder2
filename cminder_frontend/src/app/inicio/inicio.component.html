@@ -11,7 +11,7 @@
       <div class="task-actions">
         <button class="update-button" (click)="confirmarActualizar(tarea)">Actualizar</button>
         <button class="delete-button" (click)="borrarTarea(tarea)">Eliminar</button>
-        <button class="book-button">Recordatorio</button>
+        <button class="book-button" (click)="abrirRecordatorio(tarea)">Recordatorio</button>
       </div>
 
       <div *ngIf="loading" class="spinner">Cargando...</div>
@@ -20,14 +20,14 @@
 
   <div *ngIf="mostrarModalActualizar" class="modal">
     <div class="modal-content">
-      <h2>Actualizando Tarea</h2>
-      <form (submit)="actualizarTarea(); $event.preventDefault()">
-        <label for="descripcion">Descripción:</label><br>
-        <input type="text" id="descripcion" name="descripcion" (change)="actualizarDescripcionActual($event)" value="{{tareaActualizar.descripcion}}"><br>
-        <input type="submit" value="Actualizar">
-      </form>
+        <span class="close" (click)="cerrarModal()">&times;</span>
+        <h2>Actualizando Tarea</h2>
+        <form (submit)="actualizarTarea(); $event.preventDefault()">
+            <label for="descripcion">Descripción:</label><br>
+            <input type="text" id="descripcion" name="descripcion" (change)="actualizarDescripcionActual($event)" value="{{tareaActualizar.descripcion}}"><br>
+            <input type="submit" value="Actualizar">
+        </form>
     </div>
-  </div>
+</div>
 
-  
 </div>

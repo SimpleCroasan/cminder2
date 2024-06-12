@@ -4,6 +4,7 @@ import { NgIf } from '@angular/common';
 import { ModalComponentexport } from '../modal/modal.component';
 import { TareaService } from './tarea.service';
 import { Tarea } from './tarea';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -18,7 +19,7 @@ export class InicioComponent {
   tareas: Tarea[] = [];
   nuevaTarea: Tarea = new Tarea();
   tareaActualizar: Tarea = new Tarea();
-  constructor(private tareaService: TareaService) {}
+  constructor(private tareaService: TareaService, private router: Router) {}
 
   ngOnInit(): void {
     this.showModal = true;
@@ -90,5 +91,17 @@ export class InicioComponent {
     this.tareaActualizar.descripcion = event.target.value;
   }
   
-  
+  abrirRecordatorio(tarea:Tarea): void {
+    this.router.navigate(['/recordatorio', tarea.id]);
+}
+
+cerrarModal(): void {
+  this.mostrarModalActualizar = false;
+}
+
+
+
+
+
+
 }
