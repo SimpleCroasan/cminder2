@@ -1,8 +1,13 @@
-<mat-form-field>
-    <input matInput [matDatepicker]="picker" (dateChange)="actualizarFecha($event)">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+
+<div *ngIf="existeRecordatorio">
+    <p>hola</p>
+  </div>
   
-  <button (click)="agregarRecordatorio(tarea)">Submit</button>
+  <div *ngIf="!existeRecordatorio">
+    <form (submit)="agregarRecordatorio()">
+        <label for="fecha">Fecha:</label><br>
+        <input type="date" id="fecha" name="fecha" (input)="actualizarFecha($event)"><br>
+        <input type="submit" value="Enviar">
+      </form>
+  </div>
   

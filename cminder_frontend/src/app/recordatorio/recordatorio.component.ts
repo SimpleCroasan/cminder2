@@ -4,13 +4,14 @@ import { NgFor } from '@angular/common';
 import { NgIf } from '@angular/common';
 import { tap } from 'rxjs/operators';
 import { ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecordatorioService } from './recordatorio.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Tarea } from '../inicio/tarea';
+import { DataService } from '../inicio/data.service';
 
 @Component({
   selector: 'app-recordatorio',
@@ -22,21 +23,29 @@ import { Tarea } from '../inicio/tarea';
 export class RecordatorioComponent implements OnInit {
   nuevoRecordatorio: Recordatorio = new Recordatorio();
   tarea:Tarea = new Tarea();
+  tareaId:number;
+  existeRecordatorio: boolean;
 
-  constructor(private recordatorioService: RecordatorioService, private router: Router) { }
+  constructor(private recordatorioService: RecordatorioService, private router: Router, private dataService: DataService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
- 
-    this.nuevoRecordatorio.titulo = this.tarea.descripcion;
+    this.dataService.tareaActual.subscribe(tarea => this.tarea = tarea);
+    this.nuevoRecordatorio.titulo = this.tarea.descripcion; 
+    this.tareaId = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.recordatorioService.existeRecordatorio(this.tareaId).subscribe(existe => {
+      this.existeRecordatorio = existe;
+    });
   }
 
-  agregarRecordatorio(tarea: Tarea): void {
-    this.nuevoRecordatorio.titulo = tarea.descripcion;
+  agregarRecordatorio(): void {
+    this.nuevoRecordatorio.tareaId = this.tareaId;
     this.recordatorioService.insertarRecordatorio(this.nuevoRecordatorio).subscribe(recordatorio => {
-
+    
       this.nuevoRecordatorio = new Recordatorio(); 
     });
   }
+  
   
 
 

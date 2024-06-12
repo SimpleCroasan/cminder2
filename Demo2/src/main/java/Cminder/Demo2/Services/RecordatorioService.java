@@ -39,6 +39,14 @@ public class RecordatorioService {
 
     }
 
+    public boolean recordatorioExist(long id) {
+        if (recordatorioRepository.findByTareaId(id)!= null) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
 
 

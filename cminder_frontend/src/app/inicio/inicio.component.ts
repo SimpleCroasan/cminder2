@@ -5,6 +5,8 @@ import { ModalComponentexport } from '../modal/modal.component';
 import { TareaService } from './tarea.service';
 import { Tarea } from './tarea';
 import { Router } from '@angular/router';
+import{DataService} from './data.service';
+
 
 @Component({
   selector: 'app-inicio',
@@ -19,7 +21,7 @@ export class InicioComponent {
   tareas: Tarea[] = [];
   nuevaTarea: Tarea = new Tarea();
   tareaActualizar: Tarea = new Tarea();
-  constructor(private tareaService: TareaService, private router: Router) {}
+  constructor(private tareaService: TareaService, private router: Router, private dataService:DataService) {}
 
   ngOnInit(): void {
     this.showModal = true;
@@ -91,9 +93,11 @@ export class InicioComponent {
     this.tareaActualizar.descripcion = event.target.value;
   }
   
-  abrirRecordatorio(tarea:Tarea): void {
-    this.router.navigate(['/recordatorio', tarea.id]);
-}
+  abrirRecordatorio(tarea: Tarea): void {
+    this.dataService.cambiarTarea(tarea); // Guarda la tarea en el servicio de datos
+    this.router.navigate(['/recordatorio', tarea.id]); // Navega al componente de recordatorio
+  }
+  
 
 cerrarModal(): void {
   this.mostrarModalActualizar = false;
