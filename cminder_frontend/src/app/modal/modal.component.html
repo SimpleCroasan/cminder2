@@ -1,8 +1,8 @@
 <div class="modal" >
-    <h1>Lista de elementos</h1>
+    <h1>Lista de recordatorios</h1>
     <div class="content">
-        <div *ngFor="let item of items">
-            <input type="checkbox" (change)="selectItem(item)" [checked]="selectedItems.includes(item)"> {{ item }}
+        <div *ngFor="let recordatorio of recordatorios">
+            <input type="checkbox" (change)="selectItem(recordatorio)" [checked]="selectedItems.includes(recordatorio)"> {{ recordatorio.titulo }}
         </div>
     </div>
     <div class="actions">

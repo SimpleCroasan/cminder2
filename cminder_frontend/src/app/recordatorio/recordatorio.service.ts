@@ -19,5 +19,20 @@ export class RecordatorioService {
     return this.http.get<boolean>(`${this.url}/existe/${tareaId}`);
   }
 
+  borrarRecordatorio(recordatorioId: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/borrar/${recordatorioId}`);
+  }
+
+  obtenerRecordatorioPorTarea(tareaId: number): Observable<Recordatorio> {
+    return this.http.get<Recordatorio>(`${this.url}/${tareaId}`);
+  }
+  obtenerActivos(): Observable<Recordatorio[]> {
+    return this.http.get<Recordatorio[]>(`${this.url}/activos`);
+  }
+  
+  borrarRecordatorioPorId(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/borrarPorId/${id}`);
+  }
+  
 
 }

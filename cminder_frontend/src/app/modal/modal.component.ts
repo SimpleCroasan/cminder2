@@ -4,6 +4,9 @@ import { NgFor } from '@angular/common';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { InicioComponent } from '../inicio/inicio.component';
+import { Recordatorio } from '../recordatorio/recordatorio';
+import { RecordatorioService} from '../recordatorio/recordatorio.service';
+
 
 @Component({
   selector: 'app-modal',
@@ -13,26 +16,44 @@ import { InicioComponent } from '../inicio/inicio.component';
   styleUrl: './modal.component.css'
 })
 export class ModalComponentexport implements OnInit {
-  items: string[] = ['Elemento 1', 'Elemento 2', 'Elemento 3'];
-  selectedItems: string[] = [];
+  recordatorios:Recordatorio[]=[];
+  selectedItems: Recordatorio[] = [];
 
-  constructor(private inicioComponent: InicioComponent) {}
-
+  constructor(private inicioComponent: InicioComponent, private recordatorioService: RecordatorioService) {}
   ngOnInit(): void {
-    // Aquí puedes agregar cualquier lógica que necesites ejecutar cuando se inicializa el componente
+    this.cargarRecordatorios();
   }
+  
+  cargarRecordatorios(): void {
+    this.recordatorioService.obtenerActivos().subscribe(recordatorios => {
+      this.recordatorios = recordatorios;
+    });
+  }
+  
 
-  selectItem(item: string): void {
+
+  selectItem(item: Recordatorio): void {
     this.selectedItems.push(item);
   }
+  
 
   onOk(): void {
     this.inicioComponent.showModal = false;
   }
 
   deleteSelectedItems(): void {
-    this.items = this.items.filter(item => !this.selectedItems.includes(item));
+    this.selectedItems.forEach(recordatorio => {
+      if(recordatorio.id != undefined){
+        this.recordatorioService.borrarRecordatorioPorId(recordatorio.id).subscribe(() => {
+          console.log(`Recordatorio con id ${recordatorio.id} borrado exitosamente`);
+        });
+      }
+      
+    });
     this.selectedItems = [];
     this.inicioComponent.showModal = false;
   }
 }
+  
+
+

@@ -47,6 +47,13 @@ public class RecordatorioService {
         }
     }
 
+    public Recordatorio getRecordatorio(long id) {
+        return recordatorioRepository.findByTareaId(id);
+    }
+
+    public Recordatorio getRecordatorioById(long id) {
+        return recordatorioRepository.findById(id).get();
+    }
 
 
 

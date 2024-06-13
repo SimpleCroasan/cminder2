@@ -53,24 +53,24 @@ export class InicioComponent {
   loading: boolean = false;
 
 
-  borrarTarea(tarea: Tarea): void {
-    if (tarea && tarea.id !== undefined) {
-      this.loading = true; // Mostrar el spinner
-      this.tareaService.borrarTarea(tarea.id).subscribe(
-        () => {
-          // Actualizar la lista de tareas sin recargar la página
-          this.tareas = this.tareas.filter(t => t.id !== tarea.id);
-          this.loading = false; // Ocultar el spinner
-        },
-        error => {
-          // Manejar el error aquí (opcional)
-          console.error('Error al borrar la tarea:', error);
-          this.loading = false; // Ocultar el spinner
-          location.reload();
-        }
-      );
+    borrarTarea(tarea: Tarea): void {
+      if (tarea && tarea.id !== undefined) {
+        this.loading = true; 
+        this.tareaService.borrarTarea(tarea.id).subscribe(
+          () => {
+            
+            this.tareas = this.tareas.filter(t => t.id !== tarea.id);
+            this.loading = false; 
+          },
+          error => {
+          
+            console.error('Error al borrar la tarea:', error);
+            this.loading = false; 
+            location.reload();
+          }
+        );
+      }
     }
-  }
 
 
 

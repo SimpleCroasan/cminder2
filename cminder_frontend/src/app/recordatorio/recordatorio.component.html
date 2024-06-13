@@ -1,13 +1,21 @@
-
-<div *ngIf="existeRecordatorio">
-    <p>hola</p>
-  </div>
-  
-  <div *ngIf="!existeRecordatorio">
-    <form (submit)="agregarRecordatorio()">
-        <label for="fecha">Fecha:</label><br>
-        <input type="date" id="fecha" name="fecha" (input)="actualizarFecha($event)"><br>
-        <input type="submit" value="Enviar">
-      </form>
+<div class="recordatorio-container">
+    <div class="centrar-div">
+        <button class="btn-back" (click)="irATareas()">&larr;</button>
+      <div [style.visibility]="existeRecordatorio ? 'visible' : 'hidden'" class="recordatorio-existente">
+        
+        <h3>Ya hay un recordatorio</h3>
+        <button class="btn-borrar" (click)="borrarRecordatorioPorTarea()">Borrar recordatorio</button>
+      </div>
+    
+      <div [style.visibility]="!existeRecordatorio ? 'visible' : 'hidden'" class="recordatorio-nuevo">
+        
+        <h3>Añade la fecha de tu recordatorio</h3>
+        <form (submit)="agregarRecordatorio()">
+          <label for="fecha">Fecha:</label><br>
+          <input type="date" id="fecha" name="fecha" (input)="actualizarFecha($event)"><br>
+          <input type="submit" value="Enviar">
+        </form>
+      </div>
+    </div>
   </div>
   

@@ -24,7 +24,9 @@ export class RecordatorioComponent implements OnInit {
   nuevoRecordatorio: Recordatorio = new Recordatorio();
   tarea:Tarea = new Tarea();
   tareaId:number;
+  recordatorioId:number;
   existeRecordatorio: boolean;
+  recordatorioBorrar: Recordatorio | undefined;
 
   constructor(private recordatorioService: RecordatorioService, private router: Router, private dataService: DataService, private route: ActivatedRoute) { }
 
@@ -40,10 +42,14 @@ export class RecordatorioComponent implements OnInit {
 
   agregarRecordatorio(): void {
     this.nuevoRecordatorio.tareaId = this.tareaId;
+   
+    
     this.recordatorioService.insertarRecordatorio(this.nuevoRecordatorio).subscribe(recordatorio => {
     
       this.nuevoRecordatorio = new Recordatorio(); 
+      
     });
+    this.irATareas();
   }
   
   
@@ -53,4 +59,26 @@ export class RecordatorioComponent implements OnInit {
     this.nuevoRecordatorio.fechaMin = new Date(event.target.value);
   }
   
+
+  irATareas(): void {
+    this.router.navigate(["/"]); 
+  }
+  borrarRecordatorioPorTarea(): void {
+    this.recordatorioService.obtenerRecordatorioPorTarea(this.tareaId).subscribe(recordatorio => {
+      if (recordatorio && recordatorio.id !== undefined) {
+        this.recordatorioService.borrarRecordatorio(recordatorio.id).subscribe(() => {
+          console.log('Recordatorio borrado exitosamente');
+          this.irATareas();
+          // Aquí puedes actualizar la lista de recordatorios o redirigir al usuario, etc.
+        });
+      } else {
+        console.log('No se encontró ningún recordatorio para esta tarea');
+        this.irATareas();
+      }
+      this.irATareas();
+    });
+  }
+  
+
+
 }
