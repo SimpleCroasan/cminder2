@@ -34,5 +34,9 @@ export class RecordatorioService {
     return this.http.delete<void>(`${this.url}/borrarPorId/${id}`);
   }
   
+  getAllRecordatorio(): Observable<Recordatorio[]> {
+    return this.http.get<Recordatorio[]>(this.url);
+  }
+
 
 }

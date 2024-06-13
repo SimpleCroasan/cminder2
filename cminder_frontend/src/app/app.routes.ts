@@ -4,6 +4,7 @@ import { NotaComponent } from './nota/nota.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { MenuComponent } from './menu/menu.component';
 import { RecordatorioComponent } from './recordatorio/recordatorio.component';
+import{CalendarioComponent} from './calendario/calendario.component'
 
 export const routes: Routes = [
 
@@ -25,6 +26,12 @@ export const routes: Routes = [
     {path: 'recordatorio/:id', component: RecordatorioComponent
 
     },
+
+    {path: 'calendario', component: CalendarioComponent
+
+    },
+    
+    
 
 
 

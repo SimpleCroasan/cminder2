@@ -54,6 +54,9 @@ public class RecordatorioService {
     public Recordatorio getRecordatorioById(long id) {
         return recordatorioRepository.findById(id).get();
     }
+    public List<Recordatorio> getRecordatoriosTotales() {
+        return recordatorioRepository.findAll();
+    }
 
 
 

@@ -61,7 +61,7 @@ public class RecordatorioController {
         return ResponseEntity.badRequest().build();
     }
 
-    @DeleteMapping("/borrarPorId/{id}")
+        @DeleteMapping("/borrarPorId/{id}")
     public ResponseEntity<String> borrarPorId(@PathVariable long id) {
         if (recordatorioService.getRecordatorioById(id) !=null) {
             recordatorioService.deleteRecordatorio(id);
@@ -69,5 +69,14 @@ public class RecordatorioController {
         }
         return ResponseEntity.badRequest().build();
 
+    }
+
+
+    @GetMapping("")
+    public ResponseEntity<List<Recordatorio>> obtenerRecordatoriosTotales() {
+        if(!recordatorioService.getRecordatoriosTotales().isEmpty()){
+            return ResponseEntity.ok(recordatorioService.getRecordatoriosTotales());
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
