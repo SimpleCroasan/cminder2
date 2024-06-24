@@ -1,1 +1,16 @@
 <full-calendar *ngIf="calendarVisible" [options]="calendarOptions"></full-calendar>
+
+
+<div *ngIf="mostrarModalRecordatorio" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="mostrarModalRecordatorio = false">×</span>
+      <h2>Agregar Recordatorio</h2>
+      <form (submit)="insertarRecordatorio(); $event.preventDefault()">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" (input)="actualizarTitulo($event)">
+        <br>
+        <input type="submit" value="Agregar">
+      </form>
+    </div>
+  </div>
+  
