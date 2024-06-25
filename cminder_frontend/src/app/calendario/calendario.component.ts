@@ -22,6 +22,11 @@ export class CalendarioComponent implements OnInit {
   tituloRecordatorio: string = '';
   mostrarModalRecordatorio = false;
   fechaSeleccionada: string = '';
+  mostrarModalRecordatorioBorrar = false;
+  recordatorios: Recordatorio[] = [];
+  selectedItems: Recordatorio[] = [];
+  
+
 
   calendarEvents: Array<{ title: string; start: string; allDay: boolean }> = [];
   calendarOptions = {
@@ -35,6 +40,7 @@ export class CalendarioComponent implements OnInit {
   constructor(private recordatorioService: RecordatorioService) {}
 
   ngOnInit() {
+    this.cargarRecordatorios();
     this.recordatorioService.getAllRecordatorio().subscribe((recordatorios) => {
       this.calendarEvents = recordatorios.map((recordatorio) => ({
         title: recordatorio.titulo as string,
@@ -78,4 +84,38 @@ export class CalendarioComponent implements OnInit {
   customizeEvent(info: any) {
     info.event.setProp('start', new Date(info.event.start).toISOString());
   }
+
+
+  cargarRecordatorios(): void {
+    this.recordatorioService.getAllRecordatorio().subscribe(recordatorios => {
+      this.recordatorios = recordatorios;
+    });
+  }
+
+  abrirModal() {
+    this.mostrarModalRecordatorioBorrar = true;
+  }
+
+  cerrarModal() {
+    this.mostrarModalRecordatorioBorrar = false;
+  }
+
+  selectItem(item: Recordatorio): void {
+    this.selectedItems.push(item);
+  }
+
+  borrarRecordatoriosSeleccionados(): void {
+    this.selectedItems.forEach(recordatorio => {
+      if (recordatorio.id !== undefined) {
+        this.recordatorioService.borrarRecordatorioPorId(recordatorio.id).subscribe(() => {
+          console.log(`Recordatorio con id ${recordatorio.id} borrado exitosamente`);
+        });
+      }
+    });
+    this.selectedItems = [];
+    this.cerrarModal();
+    window.location.reload();
+  }
+
+  
 }

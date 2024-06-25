@@ -1,4 +1,6 @@
+<button (click)="abrirModal()" class="botonborrarrecord">Borrar recordatorios</button>
 <full-calendar *ngIf="calendarVisible" [options]="calendarOptions"></full-calendar>
+
 
 
 <div *ngIf="mostrarModalRecordatorio" class="modal">
@@ -14,3 +16,19 @@
     </div>
   </div>
   
+
+<div class="modalBorrar" *ngIf="mostrarModalRecordatorioBorrar">
+ 
+  <div class="contentborrar">
+    <h1>Lista de recordatorios</h1>
+    <div *ngFor="let recordatorio of recordatorios">
+      <input type="checkbox" (change)="selectItem(recordatorio)" [checked]="selectedItems.includes(recordatorio)">
+      {{ recordatorio.titulo }} - {{ recordatorio.fechaMin }}
+    </div>
+    <div class="actions">
+      <button class="modal-button delete" (click)="borrarRecordatoriosSeleccionados()">Borrar recordatorios seleccionados</button>
+      <button class="modal-button ok" (click)="cerrarModal()">OK</button>
+    </div>
+  </div>
+
+</div>
