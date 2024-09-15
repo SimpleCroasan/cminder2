@@ -1,23 +1,24 @@
+
 PROJECT TITLE: CMINDER
 
-PURPOSE OF PROJECT: CREAR UNA APLICACION DE GESTION DE TAREAS Y NOTAS PAR ESTUDIANTES
+PURPOSE OF PROJECT: Create a task and note management application for students
 
-VERSION or DATE: 7/06/2024
+VERSION or DATE: 06/07/2024
 
 HOW TO START THIS PROJECT:
-El proyecto fue desarrollado en Sprinboot con angular. Se necesita Angular 17.3.8 y Node 20.14.0. 
-Se usó una base de datos Postgres (personalizar las conexiones si se desea)
+The project was developed using Spring Boot with Angular. You need Angular 17.3.8 and Node 20.14.0.
+A Postgres database was used (customize connections if needed).
 
 AUTHORS: Cristian Hernández
 
 USER INSTRUCTIONS:
-Posterior a descargar el proyecto se debe abrir la carpeta llamada "Demo2" utilizando un IDE que permita correr springboot
-Así, debería correr el backend. Si desea conectarla a su propia base de datos postgres, modifique el archivo application properties e ingrese sus credenciales.
+After downloading the project, open the folder named "Demo2" using an IDE that supports running Spring Boot. This should start the backend. If you wish to connect it to your own Postgres database, modify the application.properties file and enter your credentials.
 
-Para el frontend es necesario abrir la carpeta llamada "Cminder_frontend" con algún editor de código y correr el proyecto en terminal
-en la terminal ejecute los siguientes comandos: npm install (instala las dependencias) , ng serve (pone a correr el frontend)
+For the frontend, open the folder named "Cminder_frontend" with a code editor and run the project in the terminal.
+In the terminal, execute the following commands:
 
-La pagina web en local la encuentra en http://localhost:4200/
+npm install (installs dependencies)
+ng serve (starts the frontend)
+You can access the local web page at: http://localhost:4200/
 
-
-repo de GitHub: https://github.com/SimpleCroasan/cminder2
+GitHub Repository: https://github.com/SimpleCroasan/cminder2
