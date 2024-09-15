@@ -8,7 +8,7 @@ HOW TO START THIS PROJECT:
 El proyecto fue desarrollado en Sprinboot con angular. Se necesita Angular 17.3.8 y Node 20.14.0. 
 Se usó una base de datos Postgres (personalizar las conexiones si se desea)
 
-AUTHORS: Cristian Hernández, Mateo Ortiz
+AUTHORS: Cristian Hernández
 
 USER INSTRUCTIONS:
 Posterior a descargar el proyecto se debe abrir la carpeta llamada "Demo2" utilizando un IDE que permita correr springboot
